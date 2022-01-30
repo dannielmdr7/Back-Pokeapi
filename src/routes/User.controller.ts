@@ -1,13 +1,28 @@
 import {RequestHandler} from 'express';
+import { pokemonApi } from '../external-api/pokemonApi';
 import User from './User';
 const { generarJWT } = require("../helpers/jwt");
 const bcrypt = require("bcryptjs");
 ;
 
-
+const getPokemons = async()=>{
+  const pokemons = await pokemonApi.get(
+    `https://pokeapi.co/api/v2/pokemon/`,
+    );
+    return pokemons.data
+}
 export const getUsers: RequestHandler=async(req,res) =>{
   try {
-    res.json('Usuarios')
+    console.log('req',req);
+    const poke =await  getPokemons();
+    res.status(200).json({
+      ok:true,
+      data:poke
+    })
+    // return res.json({
+      // ok: true,
+      // data:resp.data.results[1]
+    // })
   } catch (error) {
     console.log(error);
   }

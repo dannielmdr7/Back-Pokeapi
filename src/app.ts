@@ -1,5 +1,6 @@
 import express from 'express';
 import UserRoutes from './routes/User.routes';
+import PokemonRoutes from './routes/pokemon/Pokemon.routes'
 import morgan from 'morgan';
 import cors from 'cors';
 ;
@@ -11,4 +12,5 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 app.use(UserRoutes)
+app.use(PokemonRoutes)
 export default app;
