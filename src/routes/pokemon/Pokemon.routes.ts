@@ -5,7 +5,11 @@ import * as PokemonController from './Pokemon.Controller';
 
 const router = Router();
 
-router.get('/pokemon',[validarJWT],PokemonController.getPokemon)
+router.get('/pokemon/:id',[validarJWT],PokemonController.getPokemon);
+router.get('/pokemons',[validarJWT],PokemonController.getAllPokemon);
+router.get('/pokemonsPage/:limit',[validarJWT],PokemonController.getPokemonsPerPage);
+
+
 
 
 

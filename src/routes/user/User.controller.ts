@@ -1,7 +1,7 @@
 import {RequestHandler} from 'express';
-import { pokemonApi } from '../external-api/pokemonApi';
+import { pokemonApi } from '../../external-api/pokemonApi';
 import User from './User';
-const { generarJWT } = require("../helpers/jwt");
+const { generarJWT } = require("../../helpers/jwt");
 const bcrypt = require("bcryptjs");
 ;
 
@@ -43,7 +43,7 @@ export const createUser: RequestHandler=async (req,res) =>{
     const salt = bcrypt.genSaltSync();
     usuario.password = bcrypt.hashSync(password, salt);
     //generar Token
-    const token = await generarJWT(usuario.id);
+    const token = await generarJWT(usuario.id,usuario.nickName,usuario.team);
 
     await usuario.save();
     res.json({
@@ -79,7 +79,9 @@ export const authUser: RequestHandler=async (req,res) =>{
       });
     }
     //Generar el TOKEN JWT
-    const token = await generarJWT(usuarioDb.id);
+    const token = await generarJWT(usuarioDb.id,usuarioDb.nickName,usuarioDb.team);
+    usuarioDb.lastConnection = new Date();
+    usuarioDb.save();
     res.json({
       ok: true,
       token,

@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import * as UserController from './User.controller';
-const { validarJWT } = require("../middlewares/validar-jwt");
+const { validarJWT } = require("../../middlewares/validar-jwt");
 ;
 
 const router = Router();
