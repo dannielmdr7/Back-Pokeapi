@@ -62,12 +62,12 @@ export const createUser: RequestHandler=async (req,res) =>{
 export const authUser: RequestHandler=async (req,res) =>{
   const { user, password } = req.body;
   try {
-    //Verificar Email
+    //Verificar User
     const usuarioDb = await User.findOne({ user });
     if (!usuarioDb) {
       return res.status(404).json({
         ok: false,
-        msg: "Email no encontrado",
+        msg: "Usuario no encontrado",
       });
     }
     //Verificar Contraseña
