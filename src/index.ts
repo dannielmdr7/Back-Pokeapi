@@ -1,8 +1,11 @@
 import app from './app';
 import './database'
+import config from './config';
+;
 
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('App runing in port', process.env.PORT);
+
+app.listen(config.PORT ,()=>{
+  console.log('App runing in port',config.PORT);
 });
 
 
